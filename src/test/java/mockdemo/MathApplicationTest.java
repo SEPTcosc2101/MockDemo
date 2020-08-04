@@ -55,6 +55,14 @@ public class MathApplicationTest {
 	}
 	
 	@Test
+	public void testMultiply() {
+		//add the behavior of calc service to multiply two numbers
+		when(calcService.multiply(20.0,10.0)).thenReturn(200.00);
+		//test the multiply functionality
+		Assert.assertEquals(mathApplication.multiply(20.0, 10.0),200.0,0.0);
+	}
+	
+	@Test
 	public void testDivide() {
 		//add the behavior to throw exception
 		doThrow(new ArithmeticException("Division by Zero"))
@@ -68,6 +76,11 @@ public class MathApplicationTest {
 			String actual = exc.getMessage();
 			Assert.assertEquals( expected, actual );
 		}
+		
+		// now test a normal case
+		when(calcService.divide(20.0,10.0)).thenReturn(2.00);
+		//test the modulus functionality
+		Assert.assertEquals(mathApplication.divide(20.0, 10.0),2.0,0.0);
 	}
 	
 	@Test
@@ -88,6 +101,6 @@ public class MathApplicationTest {
 		// now test a normal case
 		when(calcService.modulus(20.0,10.0)).thenReturn(0.00);
 		//test the modulus functionality
-		Assert.assertEquals(mathApplication.modulus(20.0, 10.0),2.0,0.0);
+		Assert.assertEquals(mathApplication.modulus(20.0, 10.0),0.0,0.0);
 	}
 }
